@@ -1,9 +1,9 @@
-deploy_password=AKwWM4Qu2GRppJ7
-pg_pass=AKwWM4Qu2GRppJ7
-redis_pass=AKwWM4Qu2GRppJ7
+deploy_password=Vv147258Az369
+pg_pass=Vv147258Az369
+redis_pass=Vv147258Az369
 deploy_email=seuemail@gmail.com
-repositorio=https://github.com/cleitonme/izing.open.io.git
-nome_instancia=izing1
+repositorio=https://github.com/vivinho/vizing.open.io.git
+nome_instancia=vizing1
 porta_postgre_intancia=5432
 frontend_url=front.seusite.com.br
 frontend_porta=4000

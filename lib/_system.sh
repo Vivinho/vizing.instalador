@@ -131,7 +131,7 @@ EOF
 #######################################
 system_unzip_izing() {
   print_banner
-  printf "${WHITE} 💻 Baixando izing...${GRAY_LIGHT}"
+  printf "${WHITE} 💻 Baixando vizing...${GRAY_LIGHT}"
   printf "\n\n"
 
   sleep 2
@@ -178,7 +178,7 @@ system_node_install() {
   sleep 2
 
   sudo su - root <<EOF
-  curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+  curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
   apt-get install -y nodejs
 EOF
 
@@ -193,7 +193,7 @@ criar_banco_dados() {
   sleep 2
 
   sudo su - root <<EOF
-docker run --name postgresql-${nome_instancia} -e POSTGRES_USER=izing -e POSTGRES_PASSWORD=${pg_pass} -e TZ="America/Sao_Paulo" -p ${porta_postgre_intancia}:5432 --restart=always -v /data:/var/lib/postgresql/data -d postgres
+docker run --name postgresql-${nome_instancia} -e POSTGRES_USER=vizing -e POSTGRES_PASSWORD=${pg_pass} -e TZ="America/Sao_Paulo" -p ${porta_postgre_intancia}:5432 --restart=always -v /data:/var/lib/postgresql/data -d postgres
 
 EOF
 
@@ -341,7 +341,7 @@ EOF
 #######################################
 system_set_user_mod() {
   print_banner
-  printf "${WHITE} 💻 Vamos permisoes docker...${GRAY_LIGHT}"
+  printf "${WHITE} 💻 Vamos dar as permisoes para o docker...${GRAY_LIGHT}"
   printf "\n\n"
 
   sleep 2
