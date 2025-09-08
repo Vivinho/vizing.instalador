@@ -38,23 +38,23 @@ Depois reniciar seguir com a instalacao
 cd /root
 ```
 ```bash
-git clone https://github.com/cleitonme/izing.instalador.git izinginstalador
+git clone https://github.com/vivinho/vizing.instalador.git vizinginstalador
 ```
 Editar dados com seus dados, com nano para salvar aperta Ctrl + x
 
 Você pode definir o timezone desejado usando a variável de ambiente TIMEZONE. Caso não seja informado, o sistema usará o timezone padrão: America/Sao_Paulo.
 ```bash
-nano ./izinginstalador/config
+nano ./vizinginstalador/config
 ```
 
 ```bash
-sudo chmod +x ./izinginstalador/izing
+sudo chmod +x ./vizinginstalador/izing
 ```
 ```bash
-cd ./izinginstalador
+cd ./vizinginstalador
 ```
 ```bash
-sudo ./izing
+sudo ./vizing
 ```
 
 ## Problemas conexão whatsapp? ##
