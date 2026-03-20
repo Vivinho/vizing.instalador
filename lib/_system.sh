@@ -125,7 +125,7 @@ EOF
 
 
 #######################################
-# unzip izing
+# unzip vizing
 # Arguments:
 #   None
 #######################################
@@ -178,7 +178,7 @@ system_node_install() {
   sleep 2
 
   sudo su - root <<EOF
-  curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
+  curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
   apt-get install -y nodejs
 EOF
 
@@ -458,7 +458,7 @@ system_docker_start() {
   sudo su - root <<EOF
   docker stop $(docker ps -q)
   docker container start postgresql
-  docker container start redis-izing
+  docker container start redis-vizing
   docker container start rabbitmq
 EOF
 
@@ -499,7 +499,7 @@ system_success() {
   printf "${CYAN_LIGHT}";
   printf "\n\n"
   printf "\n"
-  printf "Usuário: admin@izing.io"
+  printf "Usuário: admin@vizing.io"
   printf "\n"
   printf "Senha: 123456"
   printf "\n"
@@ -511,7 +511,7 @@ system_success() {
   printf "\n"
   printf "Senha Usuario Deploy: $deploy_password"
   printf "\n"
-  printf "Usuario do Banco de Dados: izing"
+  printf "Usuario do Banco de Dados: vizing"
   printf "\n"
   printf "Nome do Banco de Dados: postgres"
   printf "\n"
