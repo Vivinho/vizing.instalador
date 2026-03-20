@@ -48,7 +48,7 @@ nano ./vizinginstalador/config
 ```
 
 ```bash
-sudo chmod +x ./vizinginstalador/izing
+sudo chmod +x ./vizinginstalador/vizing
 ```
 ```bash
 cd ./vizinginstalador
