@@ -19,7 +19,7 @@ backend_db_create() {
   mkdir -p /data
   chown -R 999:999 /data
   docker run --name postgresql \
-                -e POSTGRES_USER=vizing \
+                -e POSTGRES_USER=izing \
                 -e POSTGRES_PASSWORD=${pg_pass} \
 				-e TZ="America/Sao_Paulo" \
                 -p 5432:5432 \
@@ -27,7 +27,7 @@ backend_db_create() {
                 -v /data:/var/lib/postgresql/data \
                 -d postgres
 
-  docker run --name redis-vizing \
+  docker run --name redis-izing \
                 -e TZ="America/Sao_Paulo" \
                 -p 6379:6379 \
                 --restart=always \
@@ -106,7 +106,7 @@ DB_DIALECT=postgres
 DB_PORT=${porta_postgre_intancia}
 DB_TIMEZONE=-03:00
 POSTGRES_HOST=localhost
-POSTGRES_USER=vizing
+POSTGRES_USER=izing
 POSTGRES_PASSWORD=${pg_pass}
 POSTGRES_DB=postgres
 
@@ -144,7 +144,7 @@ RABBITMQ_DEFAULT_PASS=123456
 API_URL_360=https://waba-sandbox.360dialog.io
 
 # usado para mosrar opções não disponíveis normalmente.
-ADMIN_DOMAIN=vizing.io
+ADMIN_DOMAIN=izing.io
 
 # Dados para utilização do canal do facebook
 FACEBOOK_APP_ID=3237415623048660
@@ -159,7 +159,7 @@ FACEBOOK_APP_SECRET_KEY=3266214132b8c98ac59f3e957a5efeaaa13500
 #POSTGRES_POOL_ACQUIRE=30000
 #POSTGRES_POOL_IDLE=10000
 
-# Limitar Uso do vizing Usuario e Conexões
+# Limitar Uso do Izing Usuario e Conexões
 USER_LIMIT=99
 CONNECTIONS_LIMIT=99
 [-]EOF
@@ -250,13 +250,13 @@ EOF
 }
 
 #######################################
-# updates vizing
+# updates izing
 # Arguments:
 #   None
 #######################################
 git_update() {
   print_banner
-  printf "${WHITE} 💻 Atualizando o vizing do git...${GRAY_LIGHT}"
+  printf "${WHITE} 💻 Atualizando o izing do git...${GRAY_LIGHT}"
   printf "\n\n"
 
   sleep 2

@@ -125,13 +125,13 @@ EOF
 
 
 #######################################
-# unzip vizing
+# unzip izing
 # Arguments:
 #   None
 #######################################
 system_unzip_izing() {
   print_banner
-  printf "${WHITE} 💻 Baixando vizing...${GRAY_LIGHT}"
+  printf "${WHITE} 💻 Baixando izing...${GRAY_LIGHT}"
   printf "\n\n"
 
   sleep 2
@@ -193,7 +193,7 @@ criar_banco_dados() {
   sleep 2
 
   sudo su - root <<EOF
-docker run --name postgresql-${nome_instancia} -e POSTGRES_USER=vizing -e POSTGRES_PASSWORD=${pg_pass} -e TZ="America/Sao_Paulo" -p ${porta_postgre_intancia}:5432 --restart=always -v /data:/var/lib/postgresql/data -d postgres
+docker run --name postgresql-${nome_instancia} -e POSTGRES_USER=izing -e POSTGRES_PASSWORD=${pg_pass} -e TZ="America/Sao_Paulo" -p ${porta_postgre_intancia}:5432 --restart=always -v /data:/var/lib/postgresql/data -d postgres
 
 EOF
 
@@ -341,7 +341,7 @@ EOF
 #######################################
 system_set_user_mod() {
   print_banner
-  printf "${WHITE} 💻 Vamos dar as permisoes para o docker...${GRAY_LIGHT}"
+  printf "${WHITE} 💻 Vamos permisoes docker...${GRAY_LIGHT}"
   printf "\n\n"
 
   sleep 2
@@ -458,7 +458,7 @@ system_docker_start() {
   sudo su - root <<EOF
   docker stop $(docker ps -q)
   docker container start postgresql
-  docker container start redis-vizing
+  docker container start redis-izing
   docker container start rabbitmq
 EOF
 
@@ -499,7 +499,7 @@ system_success() {
   printf "${CYAN_LIGHT}";
   printf "\n\n"
   printf "\n"
-  printf "Usuário: admin@vizing.io"
+  printf "Usuário: admin@izing.io"
   printf "\n"
   printf "Senha: 123456"
   printf "\n"
@@ -511,7 +511,7 @@ system_success() {
   printf "\n"
   printf "Senha Usuario Deploy: $deploy_password"
   printf "\n"
-  printf "Usuario do Banco de Dados: vizing"
+  printf "Usuario do Banco de Dados: izing"
   printf "\n"
   printf "Nome do Banco de Dados: postgres"
   printf "\n"
