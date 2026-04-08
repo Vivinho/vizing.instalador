@@ -41,6 +41,7 @@ ufw allow 80
 ufw allow 443
 ufw allow 9000
 ufw --force enable
+echo "{\"iptables\": false}" > /etc/docker/daemon.json
 systemctl restart docker
 sed -i -e 's/DEFAULT_FORWARD_POLICY="DROP"/DEFAULT_FORWARD_POLICY="ACCEPT"/g' /etc/default/ufw
 ufw reload
@@ -212,17 +213,15 @@ system_docker_install() {
   sleep 2
 
   sudo su - root <<EOF
-  apt-get update
-  apt-get install -y ca-certificates curl gnupg
-  install -m 0755 -d /etc/apt/keyrings
-  curl -fsSL https://docker.com | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-  chmod a+r /etc/apt/keyrings/docker.gpg
-
-  # Garante que pega o codinome correto (ex: noble)
-  echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://docker.com $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
-  
-  apt-get update
-  apt-get install -y docker-ce docker-ce-cli containerd.io
+  sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+  echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+ sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
+ apt install -y docker-ce
 EOF
 
   sleep 2
@@ -247,7 +246,7 @@ system_puppeteer_dependencies() {
   sleep 2
 
   sudo su - root <<EOF
-apt install -y ufw chromium-browser apt-transport-https libssl1.1 ffmpeg fonts-ipafont-gothic fonts-wqy-zenhei fonts-thai-tlwg fonts-kacst fonts-freefont-ttf libxss1 ca-certificates software-properties-common curl libgbm-dev wget unzip fontconfig locales gconf-service libasound2 libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgcc1 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 ca-certificates fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils build-essential libxshmfence-dev libgbm1 libasound2t64 python3 nginx
+apt install -y ufw chromium-browser apt-transport-https ffmpeg fonts-ipafont-gothic fonts-wqy-zenhei fonts-thai-tlwg fonts-kacst fonts-freefont-ttf libxss1 ca-certificates software-properties-common curl libgbm-dev wget unzip fontconfig locales gconf-service libasound2 libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 ca-certificates fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils python2-minimal build-essential libxshmfence-dev nginx
 EOF
 
   sleep 2
@@ -342,18 +341,18 @@ EOF
 #######################################
 system_set_user_mod() {
   print_banner
-  printf "${WHITE} 💻 Ajustando permissões do Docker...${GRAY_LIGHT}\n"
+  printf "${WHITE} 💻 Vamos permisoes docker...${GRAY_LIGHT}"
+  printf "\n\n"
+
+  sleep 2
 
   sudo su - root <<EOF
-  # Adiciona ao grupo
-  usermod -aG docker deploy
-  # Força a atualização do grupo na sessão atual do sistema
-  gpasswd -a deploy docker
+  sudo usermod -aG docker deploy
+  su - deploy
 EOF
 
   sleep 2
 }
-
 
 #######################################
 # restarts nginx
